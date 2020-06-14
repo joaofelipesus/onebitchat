@@ -1,13 +1,15 @@
-version: '2'
+version: "3"
 
 services:
   postgres:
-    image: 'postgres:9.5'
+    image: "postgres:9.5"
     volumes:
-      - 'postgres:/var/lib/postgresql/data'
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
 
   redis:
-    image: 'redis:6'
+    image: 'redis:6.0.4'
     command: redis-server
     ports:
       - '6379:6379'
@@ -16,23 +18,24 @@ services:
 
   website:
     depends_on:
-      - 'postgres'
+      - "postgres"
       - 'redis'
     build: .
     command: bash start.sh
     ports:
-      - '3000:3000'
+      - "3000:3000"
     volumes:
-      - '.:/onebitchat'
-    volumes_from:
-    - box
+      - .:/onebitchat
+      - bundle_cache:/bundle_cache
+    environment:
+      - BUNDLE_PATH=/bundle_cache
 
-  box:
+  bundle_cache:
     image: busybox
     volumes:
-      - /box
+      - bundle_cache:/bundle_cache
 
 volumes:
-  redis:
   postgres:
-  box:
+  redis:
+  bundle_cache:
