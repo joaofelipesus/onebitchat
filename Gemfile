@@ -32,6 +32,7 @@ gem 'redis', '~> 4.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'jquery-rails'
 
 gem 'devise'
 gem 'cancancan'
