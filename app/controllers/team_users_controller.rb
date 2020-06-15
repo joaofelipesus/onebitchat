@@ -6,7 +6,7 @@ class TeamUsersController < ApplicationController
     if @invites.empty?
       render json: {}, status: :not_found
     else
-      render json: { invites: @invites }, status: :ok
+      render json: { invites: @invites }, status: :ok, except: [:created_at, :updated_at], include: [:team, :user]
     end
   end
 

@@ -22,6 +22,8 @@ class Ability
       can [:create, :destroy], TeamUser do |t|
         t.team.user_id == user.id
       end
+
+      can :read, TeamUser, user_id: user.id
     end
   end
 end
