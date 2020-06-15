@@ -17,7 +17,6 @@ class TeamUsersController < ApplicationController
   def destroy
     authorize! :destroy, @team_user
     @team_user.destroy
-
     respond_to do |format|
       format.json { render json: true }
     end
