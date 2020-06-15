@@ -15,9 +15,12 @@ class TeamUsersController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, @team_user
+    if @team_user.team.user == current_user
+      authorize! :destroy, @team_user
+    elsif @team_user.team.team_users.where(user: current_user).empty?
+      return render json: {}, status: :forbidden
+    end
     @team_user.destroy
-
     respond_to do |format|
       format.json { render json: true }
     end

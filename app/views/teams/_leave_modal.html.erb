@@ -1,0 +1,17 @@
+<div id="leave_team_modal" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <%= form_tag("team_users/0", :method => :delete, class: "col s12 leave_team_form") do %>
+        <div class="row">
+          <div class="col s12">
+            <h4>Leave team</h4>
+            <p>Are you sure you want to leave the team?</p>
+          </div>
+          <div class="input-field col s12">
+            <%= submit_tag("Leave", class: "btn red right") %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
