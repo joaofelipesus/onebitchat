@@ -77,4 +77,32 @@ RSpec.describe TeamUsersController, type: :controller do
     end
   end
 
+  describe 'index' do
+
+    context 'when user has open team_user' do
+      before :each do
+        create(:team)
+        create(:user)
+        create(:team_user, user: @current_user)
+        get :index
+      end
+      it 'is expected to return it' do
+        response_body = JSON.parse response.body
+        expect(response_body["invites"].size).to eq 1
+      end
+      it 'is expected to return a :ok status' do
+        expect(response).to have_http_status :ok
+      end
+    end
+    context 'when user has none open team_user' do
+      before :each do
+        get :index
+      end
+      it 'is expected to return :not found status' do
+        expect(response).to have_http_status :not_found
+      end
+    end
+
+  end
+
 end

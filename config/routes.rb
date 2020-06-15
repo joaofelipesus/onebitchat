@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/:slug', to: 'teams#show'
   resources :channels, only: [:show, :create, :destroy]
   resources :talks, only: [:show]
-  resources :team_users, only: [:create, :destroy]
+  resources :team_users, only: [:create, :destroy, :index]
   devise_for :users, :controllers => { registrations: 'registrations' }
   mount ActionCable.server => '/cable'
 end

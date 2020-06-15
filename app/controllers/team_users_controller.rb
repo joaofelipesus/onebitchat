@@ -1,6 +1,15 @@
 class TeamUsersController < ApplicationController
   before_action :set_team_user, only: [:destroy]
 
+  def index
+    @invites = TeamUser.where(user: current_user).open
+    if @invites.empty?
+      render json: {}, status: :not_found
+    else
+      render json: { invites: @invites }, status: :ok
+    end
+  end
+
   def create
     @team_user = TeamUser.new(team_user_params)
     authorize! :create, @team_user
