@@ -4,7 +4,6 @@ class TeamUsersController < ApplicationController
   def create
     @team_user = TeamUser.new(team_user_params)
     authorize! :create, @team_user
-
     respond_to do |format|
       if @team_user.save
         format.json { render :show, status: :created }
