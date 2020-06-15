@@ -94,7 +94,8 @@
    </li>
    <% if @team.user != current_user %>
     <li class="center">
-      <button id="leave-team" class="red btn btn-small">
+      <span id="team-id" data-value="<%= @team.id %>" hidden></span>
+      <button id="leave-team" class="red btn btn-small leave_team" data-value="<%= current_user.id %>">
         Leave team
       </button>
     </li>
