@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :member_teams, through: :team_users, :source => :team
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  has_one_attached :avatar
 
   def my_teams
     member_team_ids = TeamUser.where(user: self).confirmed.map { |team_user| team_user.team_id }

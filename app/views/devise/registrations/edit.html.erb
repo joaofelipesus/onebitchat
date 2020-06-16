@@ -15,6 +15,20 @@
     <%= f.email_field :email, autofocus: true %>
   </div>
 
+  <div class = "field row">
+    <%= f.label :avatar %>
+     <div class = "file-field input-field">
+        <div class = "btn">
+           <span>Browse</span>
+           <%= f.file_field :avatar, class: 'btn' %>
+        </div>
+        <div class = "file-path-wrapper">
+           <input class = "file-path validate" type = "text"
+              placeholder = "Upload multiple files" />
+        </div>
+     </div>
+  </div>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
