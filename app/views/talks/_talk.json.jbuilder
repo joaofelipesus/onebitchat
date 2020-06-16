@@ -12,6 +12,7 @@ json.messages do
     json.date message.created_at.strftime("%d/%m/%y")
     json.user do
       json.extract! message.user, :id, :name, :email
+      json.image_url url_for(message.user.avatar) if message.user.avatar.attached?
     end
   end
 end

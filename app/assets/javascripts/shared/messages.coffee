@@ -5,11 +5,17 @@ clean_messages = () ->
     $(".messages").html("")
     $(".chat_name").html("")
 
-window.add_message = (message, message_date, name) ->
+window.add_message = (message, message_date, name, avatar) ->
+  if avatar
+    avatar =  '<div class="col m2 l1">' +
+      "<img class='circle responsive-image prefix right' src='#{avatar}' style='height: 45px; width: 45px;' />"+
+    '</div>'
+  else
+    avatar = '<div class="col m2 l1">' +
+      '<i class="material-icons prefix right profile_icon">account_circle</i>'+
+    '</div>'
   $(".messages").append('<div class="message col s12">' +
-                          '<div class="col m2 l1">' +
-                            '<i class="material-icons prefix right profile_icon">account_circle</i>'+
-                          '</div>'+
+                          avatar +
                           '<div class="col m10 s9">'+
                             '<div class="row">'+
                               '<b>' + name + '</b> <span class="date">' + message_date + '</span>'+
@@ -27,6 +33,7 @@ window.open = (id, type) ->
       dataType: 'json'
       data: {team_id: $(".team_id").val()}
       success: (data, text, jqXHR) ->
+        console.log data
         if type == "talks"
           set_chat(data['user']['name'])
         else
@@ -37,7 +44,7 @@ window.open = (id, type) ->
         if(data['messages'])
           for message in data['messages']
             do ->
-              window.add_message(message['body'], message['date'], message['user']['name'])
+              window.add_message(message['body'], message['date'], message['user']['name'], message["user"]["image_url"])
       error: (jqXHR, textStatus, errorThrown) ->
         Materialize.toast('Problem to get ' + type + ' informations &nbsp;<b>:(</b>', 4000, 'red')
 
