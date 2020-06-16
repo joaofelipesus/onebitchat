@@ -6,7 +6,10 @@ App.groups = App.cable.subscriptions.create "GroupsChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    console.log data
+    current_channel = $('.chat_name').text()
+    channel = $(".channel-#{data.id}")
+    if channel and current_channel != data.slug
+      channel.addClass 'blue-text'
 
   alert: ->
     @perform 'alert'

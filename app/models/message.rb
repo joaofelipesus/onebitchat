@@ -10,8 +10,11 @@ class Message < ApplicationRecord
 
     def send_channel_notification
       if self.messagable.class == Channel
+        channel = Channel.find(self.messagable_id)
         ActionCable.server.broadcast("groups_channel", {
-          channel: Channel.find(self.messagable_id).id
+          id: channel.id,
+          slug: channel.slug,
+          team: channel.team_id
         })
       end
     end
