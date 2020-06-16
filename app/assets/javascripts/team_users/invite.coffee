@@ -29,7 +29,7 @@ $(document).on 'turbolinks:load', ->
       dataType: 'json',
       data: { team_user: { confirmation_status: "confirmed" }},
       success: (data, text, jqXHR) ->
-        $('#invite_modal').modal('close')
+        location.reload()
         Materialize.toast('Invite accepted &nbsp;<b>:(</b>', 4000, 'green')
       error: (jqXHR, textStatus, errorThrown) ->
         Materialize.toast('Problem to decline invite &nbsp;<b>:(</b>', 4000, 'red')
