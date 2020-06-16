@@ -21,18 +21,18 @@
                <span>
                   <ul class="channels">
                      <% @team.channels.each do |channel| %>
-                     <li class="channel_<%= channel.id %>">
-                        <div>
-                           <a href="#" class="open_channel" id="<%= channel.id %>">
-                           <span id="<%= channel.id %>">#<%= channel.slug %></span>
-                           </a>
-                           <% if can? :destroy, channel %>
-                           <a class="right remove_channel" href="#" id="<%= channel.id %>">
-                           <i class="material-icons" id="<%= channel.id %>">settings</i>
-                           </a>
-                           <% end %>
-                        </div>
-                     </li>
+                       <li class="channel_<%= channel.id %>">
+                          <div>
+                             <a href="#" class="open_channel" id="<%= channel.id %>">
+                             <span id="<%= channel.id %>" class=" <%= "channel-#{channel.id}"%>">#<%= channel.slug %></span>
+                             </a>
+                             <% if can? :destroy, channel %>
+                               <a class="right remove_channel" href="#" id="<%= channel.id %>">
+                                 <i class="material-icons" id="<%= channel.id %>">settings</i>
+                               </a>
+                             <% end %>
+                          </div>
+                       </li>
                      <% end %>
                      <li>
                         <div class="center">

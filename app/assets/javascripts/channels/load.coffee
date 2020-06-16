@@ -5,4 +5,5 @@ $(document).on 'turbolinks:load', ->
 
 # Get channel messages when clicked
   $('body').on 'click', 'a.open_channel', (e) ->
+    $(e.target).removeClass 'blue-text'
     window.open(e.target.id, 'channels')

@@ -23,7 +23,6 @@ $(document).on 'turbolinks:load', ->
 
   $('#accept-invite').on 'click', (e) ->
     invite_id = $(e.target).attr "data-value"
-    console.log invite_id
     $.ajax "/team_users/#{invite_id}",
       type: 'PATCH',
       dataType: 'json',
