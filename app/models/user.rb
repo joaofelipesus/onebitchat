@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :member_teams, through: :team_users, :source => :team
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  has_one_attached :avatar
 
   def my_teams
     self.teams + self.member_teams
