@@ -33,7 +33,6 @@ window.open = (id, type) ->
       dataType: 'json'
       data: {team_id: $(".team_id").val()}
       success: (data, text, jqXHR) ->
-        console.log data
         if type == "talks"
           set_chat(data['user']['name'])
         else
