@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   def my_teams
-    self.teams + self.member_teams
+    member_team_ids = TeamUser.where(user: self).confirmed.map { |team_user| team_user.team_id }
+    self.teams + Team.where(id: member_team_ids)
   end
 end

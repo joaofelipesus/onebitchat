@@ -1,10 +1,18 @@
 class TeamUsersController < ApplicationController
   before_action :set_team_user, only: [:destroy]
 
+  def index
+    @invites = TeamUser.where(user: current_user).open
+    if @invites.empty?
+      render json: {}, status: :not_found
+    else
+      render json: { invites: @invites }, status: :ok, except: [:created_at, :updated_at], include: [:team, :user]
+    end
+  end
+
   def create
     @team_user = TeamUser.new(team_user_params)
     authorize! :create, @team_user
-
     respond_to do |format|
       if @team_user.save
         format.json { render :show, status: :created }
@@ -23,6 +31,16 @@ class TeamUsersController < ApplicationController
     @team_user.destroy
     respond_to do |format|
       format.json { render json: true }
+    end
+  end
+
+  def update
+    @team_user = TeamUser.find params[:id]
+    authorize! :update, @team_user
+    if @team_user.update params.require(:team_user).permit(:confirmation_status)
+      render json: { team_user: @team_user }, status: :ok
+    else
+      render json: { errors: @team_user.errors.full_essages }, status: :unprocessable_entity
     end
   end
 

@@ -32,6 +32,7 @@ RSpec.describe TeamsController, type: :controller do
         it "Returns success" do
           team = create(:team)
           team.users << @current_user
+          TeamUser.last.update confirmation_status: :confirmed
           get :show, params: {slug: team.slug}
 
           expect(response).to have_http_status(:success)

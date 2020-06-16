@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <style media="screen">
+      h1{
+        font-family: sans-serif;
+        text-align: center;
+      }
+      p{
+        text-align: center;
+      }
+      a{
+        font: bold 14px Arial;
+        text-decoration: none;
+        background-color: #EEEEEE;
+        color: white;
+        padding: 12px 16px 12px 16px;
+        border-radius: 18px;
+        border: 1px solid #26a69a;
+        background-color: #26a69a;
+      }
+      .invite-button{
+        display: flex;
+        justify-content: center;
+        width: 15%;
+        margin-left: 42.5%;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1>Welcome <%= @team_user.user.name %></h1>
+    <div>
+      <p>You receive a invite to join <%= @team_user.team.slug %>, access the invitation clicking on the following button !</p>
+      <div class="invite-button">
+        <%= link_to "See your invite", root_url %>
+      </div>
+    </div>
+  </body>
+</html>
