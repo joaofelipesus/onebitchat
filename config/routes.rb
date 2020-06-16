@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'teams#index'
   resources :teams, only: [:create, :destroy]
-  resources :team_users, only: [:create, :destroy, :index]
+  resources :team_users, only: [:create, :destroy, :index, :update]
   get '/:slug', to: 'teams#show'
   resources :channels, only: [:show, :create, :destroy]
   resources :talks, only: [:show]

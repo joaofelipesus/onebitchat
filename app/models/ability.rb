@@ -23,7 +23,11 @@ class Ability
         t.team.user_id == user.id
       end
 
-      can :read, TeamUser, user_id: user.id
+      can [:read], TeamUser, user_id: user.id
+
+      can :update, TeamUser do |team_user|
+        team_user.user == user
+      end
     end
   end
 end

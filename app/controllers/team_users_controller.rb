@@ -34,6 +34,16 @@ class TeamUsersController < ApplicationController
     end
   end
 
+  def update
+    @team_user = TeamUser.find params[:id]
+    authorize! :update, @team_user
+    if @team_user.update params.require(:team_user).permit(:confirmation_status)
+      render json: { team_user: @team_user }, status: :ok
+    else
+      render json: { errors: @team_user.errors.full_essages }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_team_user
